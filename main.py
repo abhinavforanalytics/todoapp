@@ -26,20 +26,25 @@ while True:
         else:
             print("You have no pending tasks!")
     elif user_action.startswith('edit'):
-        number = int(user_action[5:])
-        print(number)
-        number = number-1
-        with open("Files/todo.txt", 'r') as file:
-            task = file.readlines()
+        try:
+            number = int(user_action[5:])
+            print(number)
+            number = number-1
+            with open("Files/todo.txt", 'r') as file:
+                task = file.readlines()
 
-        if number > len(task) or number<=0:
-            print(f"Please Enter valid input from 1 to {len(task)}")
-        else:
-            user_edit_ = input("Enter the new todo: ")
-            task[number] = user_edit_+"\n"
-            with open("Files/todo.txt", 'w') as file:
-                file.writelines(task)
-            print(f"Done!, Updated the info to '{user_edit_}'")
+            if number > len(task) or number<=0:
+                print(f"Please Enter valid input from 1 to {len(task)}")
+            else:
+                user_edit_ = input("Enter the new todo: ")
+                task[number] = user_edit_+"\n"
+                with open("Files/todo.txt", 'w') as file:
+                    file.writelines(task)
+                print(f"Done!, Updated the info to '{user_edit_}'")
+        except ValueError:
+            print("Your command is not valid.")
+            #give user the opportunity to enter the command again
+            continue
 
     elif user_action.startswith('complete'):
         with open("Files/todo.txt",'r') as file:
