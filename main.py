@@ -1,7 +1,7 @@
 while True:
     user_action = input("Type Add, Show, Edit, Complete or Exit: ")
     user_action = user_action.strip()
-    if 'add' in user_action or 'new' in user_action or 'more' in user_action:
+    if user_action.startswith('add'):
         task = user_action[4:] #input like 'add go to gym - 'go to gym' gets added
 
         with open("Files/todo.txt",'r') as file:
@@ -12,7 +12,7 @@ while True:
         with open("Files/todo.txt",'w') as file:
             file.writelines(todos)
 
-    elif 'show' in user_action:
+    elif user_action.startswith('show'):
         #opening the file in readmode
         with open("Files/todo.txt",'r') as file:
             task = file.readlines()
@@ -25,7 +25,7 @@ while True:
                 print(f"{index + 1}-{item.strip()}")
         else:
             print("You have no pending tasks!")
-    elif 'edit' in user_action:
+    elif user_action.startswith('edit'):
         number = int(user_action[5:])
         print(number)
         number = number-1
@@ -41,7 +41,7 @@ while True:
                 file.writelines(task)
             print(f"Done!, Updated the info to '{user_edit_}'")
 
-    elif 'complete' in user_action:
+    elif user_action.startswith('complete'):
         with open("Files/todo.txt",'r') as file:
             task = file.readlines()
         #check if there are any tasks in the list
@@ -63,7 +63,7 @@ while True:
         else:
             print("You have no pending tasks!")
 
-    elif 'exit' in user_action:
+    elif user_action.startswith('exit'):
         break
     else:
         print("Command is not valid, please keep the inputs as stated above")
