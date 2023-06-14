@@ -12,7 +12,7 @@ while True:
         with open("Files/todo.txt",'w') as file:
             file.writelines(todos)
 
-    elif user_action.startswith('show'):
+    elif user_action.startswith('show') :
         #opening the file in readmode
         with open("Files/todo.txt",'r') as file:
             task = file.readlines()
