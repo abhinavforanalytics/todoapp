@@ -1,13 +1,19 @@
+##Custom function
+def get_todos():
+    with open("Files/todo.txt", 'r') as file :
+        todos = file.readlines()
+    return todos
 
 
 while True:
     user_action = input("Type Add, Show, Edit, Complete or Exit: ")
     user_action = user_action.strip()
+
     if user_action.startswith('add'):
         task = user_action[4:] #input like 'add go to gym - 'go to gym' gets added
 
-        with open("Files/todo.txt",'r') as file:
-            todos = file.readlines()
+        todos = get_todos()
+
         #appending the read input to the variable
         todos.append(task.capitalize() + '\n')
         #writing it back to the file
@@ -16,13 +22,12 @@ while True:
 
     elif user_action.startswith('show') :
         #opening the file in readmode
-        with open("Files/todo.txt",'r') as file:
-            task = file.readlines()
+        todos = get_todos()
         #check if there are any tasks in the list
-        if task:
+        if todos:
             print(f"Your pending tasks are: ")
             # eliminating the "\n" from the end of the list
-            newtasks = [item.strip("\n") for item in task]
+            newtasks = [item.strip("\n") for item in todos]
             for index, item in enumerate(newtasks):
                 print(f"{index + 1}-{item.strip()}")
         else:
@@ -32,16 +37,16 @@ while True:
             number = int(user_action[5:])
             print(number)
             number = number-1
-            with open("Files/todo.txt", 'r') as file:
-                task = file.readlines()
 
-            if number > len(task) or number<=0:
-                print(f"Please Enter valid input from 1 to {len(task)}")
+            todos = get_todos()
+
+            if number > len(todos) or number<=0:
+                print(f"Please Enter valid input from 1 to {len(todos)}")
             else:
                 user_edit_ = input("Enter the new todo: ")
-                task[number] = user_edit_+"\n"
+                todos[number] = user_edit_+"\n"
                 with open("Files/todo.txt", 'w') as file:
-                    file.writelines(task)
+                    file.writelines(todos)
                 print(f"Done!, Updated the info to '{user_edit_}'")
         except ValueError:
             print("Your command is not valid.")
@@ -50,13 +55,12 @@ while True:
 #Complete
     elif user_action.startswith('complete'):
         try:
-            with open("Files/todo.txt",'r') as file:
-                task = file.readlines()
+            todos = get_todos()
             #check if there are any tasks in the list
-            if task:
+            if todos:
                 print(f"Your pending tasks are: ")
                 # eliminating the "\n" from the end of the list
-                todos = [item.strip("\n") for item in task]
+                todos = [item.strip("\n") for item in todos]
                 for index, item in enumerate(todos):
                     print(f"{index + 1}-{item.strip()}")
                 number = int(input("Input the number of todo to complete: "))
@@ -79,10 +83,9 @@ while True:
     else:
         print("Command is not valid, please keep the inputs as stated above")
 
-with open("Files/todo.txt", 'r') as file:
-    task = file.readlines()
+todos = get_todos()
 
-if len(task) == 0:
+if len(todos) == 0:
     print(f"The list is blank")
 else:
-    print(f"List with {len(task)} item(s): {str.join(',' , list(i for i in task))}")
+    print(f"List with {len(todos)} item(s): {str.join(',' , list(i for i in todos))}")
