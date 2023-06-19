@@ -1,3 +1,5 @@
+
+
 while True:
     user_action = input("Type Add, Show, Edit, Complete or Exit: ")
     user_action = user_action.strip()
@@ -45,28 +47,32 @@ while True:
             print("Your command is not valid.")
             #give user the opportunity to enter the command again
             continue
-
+#Complete
     elif user_action.startswith('complete'):
-        with open("Files/todo.txt",'r') as file:
-            task = file.readlines()
-        #check if there are any tasks in the list
-        if task:
-            print(f"Your pending tasks are: ")
-            # eliminating the "\n" from the end of the list
-            todos = [item.strip("\n") for item in task]
-            for index, item in enumerate(todos):
-                print(f"{index + 1}-{item.strip()}")
-            number = int(input("Input the number of todo to complete: "))
-            index = number - 1
-            todo_to_remove = todos[index].strip("\n")
-            todos.pop(index)
-            with open("Files/todo.txt", 'w') as file:
-                file.writelines("\n".join(todos)) #add new line on each time to register as different task
-            # Display which item was removed from the list
-            message = f"todo '{todo_to_remove}' removed from the list"
-            print(message)
-        else:
-            print("You have no pending tasks!")
+        try:
+            with open("Files/todo.txt",'r') as file:
+                task = file.readlines()
+            #check if there are any tasks in the list
+            if task:
+                print(f"Your pending tasks are: ")
+                # eliminating the "\n" from the end of the list
+                todos = [item.strip("\n") for item in task]
+                for index, item in enumerate(todos):
+                    print(f"{index + 1}-{item.strip()}")
+                number = int(input("Input the number of todo to complete: "))
+                index = number - 1
+                todo_to_remove = todos[index].strip("\n")
+                todos.pop(index)
+                with open("Files/todo.txt", 'w') as file:
+                    file.writelines("\n".join(todos)) #add new line on each time to register as different task
+                # Display which item was removed from the list
+                message = f"todo '{todo_to_remove}' removed from the list"
+                print(message)
+            else:
+                print("You have no pending tasks!")
+        except IndexError:
+            print("Please enter number values within the list index.")
+            continue
 
     elif user_action.startswith('exit'):
         break
