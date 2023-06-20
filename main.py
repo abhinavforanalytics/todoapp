@@ -2,12 +2,17 @@
 def get_todos(filepath):
     '''
     Reading the file todos
-    :return:
+    :rtype: object
     Todos in list format
     '''
     with open(filepath, 'r') as file :
         todos_local = file.readlines()
     return todos_local
+
+def write_todos(filepath, todos_arg):
+    with open(filepath, 'w') as file :
+        file.writelines(todos_arg) ##Since we're writing,
+        # it doesn't need to return anything, there's nothing to capture
 
 
 while True:
@@ -17,17 +22,16 @@ while True:
     if user_action.startswith('add'):
         task = user_action[4:] #input like 'add go to gym - 'go to gym' gets added
 
-        todos = get_todos("Files/todo.txt")
+        todos = get_todos(filepath="Files/todo.txt")
 
         #appending the read input to the variable
         todos.append(task.capitalize() + '\n')
         #writing it back to the file
-        with open("Files/todo.txt",'w') as file:
-            file.writelines(todos)
+        write_todos(filepath="Files/todo.txt",todos_arg=todos)
 
     elif user_action.startswith('show') :
         #opening the file in readmode
-        todos = get_todos("Files/todo.txt")
+        todos = get_todos(filepath="Files/todo.txt")
         #check if there are any tasks in the list
         if todos:
             print(f"Your pending tasks are: ")
@@ -43,15 +47,14 @@ while True:
             print(number)
             number = number-1
 
-            todos = get_todos("Files/todo.txt")
+            todos = get_todos(filepath="Files/todo.txt")
 
             if number > len(todos) or number<=0:
                 print(f"Please Enter valid input from 1 to {len(todos)}")
             else:
                 user_edit_ = input("Enter the new todo: ")
                 todos[number] = user_edit_+"\n"
-                with open("Files/todo.txt", 'w') as file:
-                    file.writelines(todos)
+                write_todos(filepath="Files/todo.txt", todos_arg=todos)
                 print(f"Done!, Updated the info to '{user_edit_}'")
         except ValueError:
             print("Your command is not valid.")
@@ -60,7 +63,7 @@ while True:
 #Complete
     elif user_action.startswith('complete'):
         try:
-            todos = get_todos("Files/todo.txt")
+            todos = get_todos(filepath="Files/todo.txt")
             #check if there are any tasks in the list
             if todos:
                 print(f"Your pending tasks are: ")
@@ -72,8 +75,7 @@ while True:
                 index = number - 1
                 todo_to_remove = todos[index].strip("\n")
                 todos.pop(index)
-                with open("Files/todo.txt", 'w') as file:
-                    file.writelines("\n".join(todos)) #add new line on each time to register as different task
+                write_todos(filepath="Files/todo.txt",todos_arg=todos)
                 # Display which item was removed from the list
                 message = f"todo '{todo_to_remove}' removed from the list"
                 print(message)
@@ -88,7 +90,7 @@ while True:
     else:
         print("Command is not valid, please keep the inputs as stated above")
 
-todos = get_todos("Files/todo.txt")
+todos = get_todos(filepath="Files/todo.txt")
 
 if len(todos) == 0:
     print(f"The list is blank")
