@@ -1,5 +1,10 @@
 ##Custom function
 def get_todos():
+    '''
+    Reading the file todos
+    :return:
+    Todos in list format
+    '''
     with open("Files/todo.txt", 'r') as file :
         todos = file.readlines()
     return todos
