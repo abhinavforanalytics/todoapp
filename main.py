@@ -10,6 +10,11 @@ def get_todos(filepath):
     return todos_local
 
 def write_todos(filepath, todos_arg):
+    '''
+    :param filepath: file path where the todos are located
+    :param todos_arg: todos that need to be written back
+    :return: None
+    '''
     with open(filepath, 'w') as file :
         file.writelines(todos_arg) ##Since we're writing,
         # it doesn't need to return anything, there's nothing to capture
