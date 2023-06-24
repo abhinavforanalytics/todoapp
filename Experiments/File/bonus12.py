@@ -7,4 +7,9 @@ def convert(feet_inches) :
 
 
 value = convert(feet_inches)
-print(f'{value:.2f} mts')
+# print(f'{value:.2f} mts')
+
+if value < 1:
+    print("Not allowed on the ride")
+else :
+    print(f"Enjoy the ride! since the height is {value:.2f}")
