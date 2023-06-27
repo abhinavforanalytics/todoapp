@@ -1,4 +1,4 @@
-##Custom function
+# Custom function
 def get_todos(filepath="Files/todo.txt") :
     '''
     Reading the file todos
@@ -20,3 +20,8 @@ def write_todos(todos_arg,
     with open(filepath, 'w') as file :
         file.writelines(todos_arg)  ##Since we're writing,
         # it doesn't need to return anything, there's nothing to capture
+
+
+if __name__ == '__main__':
+    print("Hello")
+    print(get_todos())
