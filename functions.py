@@ -22,7 +22,6 @@ def write_todos(todos_arg,
         # it doesn't need to return anything, there's nothing to capture
 
 
-
 if __name__ == '__main__':
     print("Hello")
     print(get_todos())
