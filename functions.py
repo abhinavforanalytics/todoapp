@@ -1,5 +1,5 @@
 # Custom function
-def get_todos(filepath="Files/todo.txt") :
+def get_todos(filepath: object = "Files/todo.txt"):
     '''
     Reading the file todos
     :rtype: object
@@ -20,6 +20,7 @@ def write_todos(todos_arg,
     with open(filepath, 'w') as file :
         file.writelines(todos_arg)  ##Since we're writing,
         # it doesn't need to return anything, there's nothing to capture
+
 
 
 if __name__ == '__main__':
