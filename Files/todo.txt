@@ -4,3 +4,6 @@ My fourth todo
 My latest todo
 My new new todo
 This is quite new todo
+Master Python
+Hello
+New todo test
