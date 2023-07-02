@@ -1,11 +1,16 @@
-My new todo
+Change this
 Somthing
 My new new todo
 This is quite new todo
 Master Python
 Hello
 New todo test
-Hello today is 2 Jul
+Hello today is 3 Jul
 
+No
+Get rid of this
+New todo in town
 Remaster my python again
 New todo up and coming pal
+
+Add this todo
