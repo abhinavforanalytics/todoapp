@@ -8,24 +8,24 @@ while True:
     user_action = user_action.strip()
 
     if user_action.startswith('add'):
-        task = user_action[4:] #input like 'add go to gym - 'go to gym' gets added
+        task = user_action[4:]  # input like 'add go to gym - 'go to gym' gets added
 
         todos = fn.get_todos()
 
-        #appending the read input to the variable
+        # appending the read input to the variable
         todos.append(task.capitalize() + '\n')
-        #writing it back to the file
-        write_todos(todos_arg=todos)
+        # writing it back to the file
+        fn.write_todos(todos_arg=todos)
 
-    elif user_action.startswith('show') :
-        #opening the file in readmode
+    elif user_action.startswith('show'):
+        # opening the file in read mode
         todos = fn.get_todos()
-        #check if there are any tasks in the list
+        # check if there are any tasks in the list
         if todos:
             print(f"Your pending tasks are: ")
             # eliminating the "\n" from the end of the list
-            newtasks = [item.strip("\n") for item in todos]
-            for index, item in enumerate(newtasks):
+            new_task = [item.strip("\n") for item in todos]
+            for index, item in enumerate(new_task):
                 print(f"{index + 1}-{item.strip()}")
         else:
             print("You have no pending tasks!")
@@ -37,22 +37,21 @@ while True:
 
             todos = fn.get_todos()
 
-            if number > len(todos) or number<=0:
+            if number > len(todos) or number <= 0:
                 print(f"Please Enter valid input from 1 to {len(todos)}")
             else:
                 user_edit_ = input("Enter the new todo: ")
                 todos[number] = user_edit_+"\n"
-                write_todos(todos_arg=todos)
+                fn.write_todos(todos_arg=todos)
                 print(f"Done!, Updated the info to '{user_edit_}'")
         except ValueError:
             print("Your command is not valid.")
-            #give user the opportunity to enter the command again
+            # give user the opportunity to enter the command again
             continue
-#Complete
     elif user_action.startswith('complete'):
         try:
             todos = fn.get_todos()
-            #check if there are any tasks in the list
+            # check if there are any tasks in the list
             if todos:
                 print(f"Your pending tasks are: ")
                 # eliminating the "\n" from the end of the list
@@ -64,7 +63,7 @@ while True:
                 todo_to_remove = todos[index].strip("\n")
                 todos.pop(index)
                 todos = [task.capitalize() + '\n' for task in todos]
-                write_todos(todos_arg=todos)
+                fn.write_todos(todos_arg=todos)
                 # Display which item was removed from the list
                 message = f"todo '{todo_to_remove}' removed from the list"
                 print(message)
