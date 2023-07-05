@@ -7,8 +7,9 @@ add_button = PYg.Button("Add")
 list_box = PYg.Listbox(values=functions.get_todos(), key='todos_list',
                        enable_events=True, size=(45, 10))  # key needed to identify list input box
 edit_button = PYg.Button("Edit")
+layout = [[label], [input_box, add_button], [list_box, edit_button]]
 window = PYg.Window('Welcome to ToDo pro!',
-                    layout=[[label], [input_box, add_button],[list_box,edit_button]],
+                    layout=layout,
                     font=('Community', 14))  # layout expects a list that expects list of object instances
 
 # Edit button coded
